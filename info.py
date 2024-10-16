@@ -15,7 +15,7 @@ def is_enabled(value, default):
 SESSION = environ.get('SESSION', 'FsBotz')
 API_ID = int("17432758")
 API_HASH = "c9e31fda0ce722e3f3033a9d4f140783"
-BOT_TOKEN = environ.get('BOT_TOKEN', "7545360483:AAGppfiB1r-p-44OKHYeUz2VdPFPcmxBTts")
+BOT_TOKEN = environ.get('BOT_TOKEN', "6631357040:AAE8kAZeM0MR0uZVknMn5pt_ZKnjJGbih1U")
 
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 1800))
@@ -135,7 +135,7 @@ if 'DYNO' in environ:
     ON_HEROKU = True
 else:
     ON_HEROKU = False
-URL = environ.get("URL", "https://awful-harley-tgbotzbyfsbotz-3d10a02b.koyeb.app/")
+URL = environ.get("URL", "https://fluttering-rosemaria-fs-movie-bot-by-fsbotz-tg-0412432f.koyeb.app/")
 
 
 # Rename Info : If True Then Bot Rename File Else Not
