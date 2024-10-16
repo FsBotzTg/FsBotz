@@ -77,7 +77,7 @@ class FsBot(Client):
                 yield message
                 current += 1
       
-FsBot = FsBotz()
+FsBotz = FsBot()
 
 multi_clients = {}
 work_loads = {}
