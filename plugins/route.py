@@ -13,13 +13,7 @@ routes = web.RouteTableDef()
 
 @routes.get("/", allow_head=True)
 async def root_route_handler(request):
-    return web.json_response("FsFilterBot")
-
-#@routes.get("/", allow_head=True)
-#async def root_route_handler(request):
-    # Assuming the HTML file is in the same directory as the script
-#    file_path = os.path.join(os.path.dirname(__file__), 'fsbotz.html')
-#    return web.FileResponse(file_path)
+    return web.json_response("FsMovieBot")
 
 @routes.get(r"/watch/{path:\S+}", allow_head=True)
 async def stream_handler(request: web.Request):
