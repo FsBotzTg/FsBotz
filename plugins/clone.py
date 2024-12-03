@@ -10,7 +10,7 @@ async def clone_menu(client, message):
     if CLONE_MODE == False:
         return await message.reply("**𝙲𝚕𝚘𝚗𝚎 𝙼𝚘𝚍𝚎 𝙸𝚜 𝚃𝚞𝚛𝚗𝚎𝚍 𝙾𝙵𝙵**")
         return 
-    if await db.has_premium_access(message.from_user.id):
+    if not await db.has_premium_access(message.from_user.id):
         return await message.reply("**𝙿𝚛𝚎𝚖𝚒𝚞𝚖 𝙰𝚌𝚌𝚎𝚜𝚜 𝙸𝚜 𝙽𝚎𝚎𝚍𝚎𝚍**")
         return 
     if await db.is_clone_exist(message.from_user.id):
