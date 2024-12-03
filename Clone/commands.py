@@ -268,3 +268,33 @@ async def stats(client, message):
     total_users = await clonedb.total_users_count(me.id)
     total = await Media.count_documents()
     await message.reply(f"**Total Files : {total}\n\nTotal Users : {total_users}**")
+
+
+#Send message to a single user
+@Client.on_message(filters.command('pm'))
+async def pm_send(client, message):
+    try:
+        me = await client.get_me()
+        owner = await db.get_bot(me.id)
+        if owner["user_id"] != message.from_user.id:
+            return
+        # Ask for the user ID
+        pm_user = await client.ask(chat_id=message.from_user.id, text="Now Send Me The User ID")
+        pm_user_id = int(pm_user.text)  # Convert to integer
+        
+        # Ask for the message to send
+        PM_MESSAGE = await client.ask(chat_id=message.from_user.id, text="Now Send Me The Message To Be Sent")
+        pm_text = PM_MESSAGE.text
+        
+        # Send the message to the specified user
+        await client.send_message(chat_id=pm_user_id, text=pm_text)
+        val = 0
+
+    except ValueError:
+        await client.send_message(chat_id=message.from_user.id, text="The User ID must be a number.")
+        val = 1
+    except Exception as e:
+        await client.send_message(chat_id=message.from_user.id, text=f"An error occurred: {str(e)}")
+        val = 1
+    if val != 1:
+        await client.send_message(chat_id=message.from_user.id, text="Message Send To User Successfully")
