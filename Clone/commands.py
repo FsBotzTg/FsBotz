@@ -11,6 +11,10 @@ from shortzy import Shortzy
 from utils import get_size, temp, get_seconds, get_clone_shortlink
 logger = logging.getLogger(__name__)
 
+CLONE_USERS ="""#NewUser
+ID - <code>{}</code>
+Nᴀᴍᴇ - {}"""
+
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
     me = await client.get_me()
@@ -26,6 +30,11 @@ async def start(client, message):
         await message.reply(script.CLONE_START_TXT.format(message.from_user.mention if message.from_user else message.chat.title, me.username, me.first_name), reply_markup=reply_markup)
         return 
     if not await clonedb.is_user_exist(me.id, message.from_user.id):
+        me = await client.get_me()
+        owner = await db.get_bot(me.id)
+        ADMIN_CLONE = int(owner["user_id"])
+        clone_users_text = CLONE_USERS.format(message.from_user.id, message.from_user.mention)
+        await client.send_message(chat_id=ADMIN_CLONE, text=clone_users_text)
         await clonedb.add_user(me.id, message.from_user.id)
     if len(message.command) != 2:
         buttons = [[
@@ -284,7 +293,7 @@ async def pm_send(client, message):
         
         # Ask for the message to send
         PM_MESSAGE = await client.ask(chat_id=message.from_user.id, text="Now Send Me The Message To Be Sent")
-        pm_text = PM_MESSAGE.text
+        pm_text = "MESSAGE FROM ADMIN \n"+(PM_MESSAGE.text)
         
         # Send the message to the specified user
         await client.send_message(chat_id=pm_user_id, text=pm_text)
