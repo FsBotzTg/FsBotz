@@ -315,7 +315,7 @@ async def admin_send(client, message):
         # the user ID
         me = await client.get_me()
         clone_owner = await db.get_bot(me.id)
-        CLONE_ADMIN = int(owner["user_id"])
+        CLONE_ADMIN = int(clone_owner["user_id"])
         # Ask for the message to send
         PM_MESSAGE = await client.ask(chat_id=message.from_user.id, text="Now Send Me The Message To Be Sent")
         
